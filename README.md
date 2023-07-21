@@ -5,7 +5,7 @@ Bienvenue sur le dépôt du projet Formatik, une application web conçue pour au
 
 L'application est déployée et accessible [ici](https://formatik.hugoptm.fr/).
 
-⚠️ ⚠️ ⚠️ Applications where you need to be logged are deployed with a default user : email: test@test.com, password: password ⚠️ ⚠️ ⚠️
+⚠️ ⚠️ ⚠️ My applications are deployed with a default user : email: test@test.com, password: password ⚠️ ⚠️ ⚠️
 
 ## Projet
 Formatik est un projet que j'ai développé dans le cadre du bootcamp de développement web du Wagon. J'ai travaillé en étroite collaboration avec une équipe de trois autres développeurs sur une durée de 10 jours.
