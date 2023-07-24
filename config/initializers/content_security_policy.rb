@@ -23,3 +23,8 @@
 #   # Report violations without enforcing the policy.
 #   # config.content_security_policy_report_only = true
 # end
+Rails.application.config.content_security_policy do |policy|
+    # policy.default_src :self, :https
+    policy.frame_ancestors :self, "*"
+    # If you have other policies, add them here.
+end
