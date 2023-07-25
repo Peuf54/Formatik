@@ -25,6 +25,8 @@
             <% end %>
         <% end %>
     </div>
+
+        <%# Sessions cards container %>
         <div class="session-index-sessions-container sec-back-plate">
             <% @sessions.each do |session| %>
                     <%= link_to sessions_formation_path(session) do %>

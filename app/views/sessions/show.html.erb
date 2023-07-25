@@ -1,5 +1,7 @@
 <%= render "shared/header", text: "Aperçu session" %>
+
 <div class="session-show-container">
+    <%# Session Card + Map %>
     <div class="session-info-flex">
         <div class="session-show-details-container sec-back-plate">
           <div class="session-show-info">
@@ -19,15 +21,7 @@
             <hr class="separator">
 
             <div class="show-session-details">
-            <%# PROGRAMME %>
-
-            <%# INTERVENANT %>
-
-            <%# DATES %>
               <div class="mini-info">
-
-
-
                 <div class="sec-back-plate grosse-plate">
                   <div class="price">
                     <p>Prix: </p>
@@ -60,16 +54,11 @@
                   </div>
                 </div>
               </div>
-
-
-              <%# PRIX %>
-
-
-              <%# ADRESSE %>
             </div>
           </div>
       </div>
 
+      <%# Map %>
       <div class="sec-back-plate map">
         <div class="mapbox"
           data-controller="map"
@@ -79,6 +68,7 @@
       </div>
     </div>
 
+    <%# Inscriptions section %>
     <div class="session-show-apprenants-container sec-back-plate">
         <div class="session-show-inscriptions-header">
             <h1>Inscriptions<span class="pending-inscriptions"> <i><%= "(#{PreInscription.where(session_id: @session.id).length} en attente)" %></i></span></h1>
