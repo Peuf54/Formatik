@@ -28,11 +28,6 @@ class SessionsController < ApplicationController
 
     def show
         @session = Session.find(params[:id])
-        @markers = Session.where(id: params[:id]).geocoded.map do |session| {
-            lat: session.latitude,
-            lng: session.longitude
-            }
-        end
     end
 
     def update
@@ -62,7 +57,19 @@ class SessionsController < ApplicationController
         redirect_to sessions_formation_index_path
     end
 
+    def getMarkersForMap
+        render json: makeMarkersForMap
+    end
+
     private
+
+    def makeMarkersForMap
+        Session.where(id: params[:id]).geocoded.map do |session| {
+            lat: session.latitude,
+            lng: session.longitude
+            }
+        end
+    end
 
     def json_for_dates(column_name, new_value)
         "<span class='show-session-details-items'>

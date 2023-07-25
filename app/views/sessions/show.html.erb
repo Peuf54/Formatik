@@ -62,7 +62,7 @@
       <div class="sec-back-plate map">
         <div class="mapbox"
           data-controller="map"
-          data-map-markers-value="<%= @markers.to_json %>">
+          data-map-session-id-value="<%= params[:id] %>">
         </div>
       </div>
     </div>
@@ -147,6 +147,3 @@
     </div>
 
 </div>
-
-
-          data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"

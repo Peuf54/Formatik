@@ -4,21 +4,29 @@ import mapboxgl from 'mapbox-gl'
 // Connects to data-controller="map"
 export default class extends Controller {
   static values = {
-    markers: Array
+    sessionId: String
   }
   connect() {
-    // Get the mapBoxGL api key through an AJAX request
-    const url = '/getMapBoxApiKey';
+    // Get the mapBoxGL api key, and the Map's markers through AJAX requests
+    const getApiUrl = '/getMapBoxApiKey';
+    const getMarkersUrl = `/getMarkersForMap/${this.sessionIdValue}`;
 
-    fetch(url)
-    .then((response) => response.text())
-    .then((data) => {
-      // Call the rest of the initialization only when the return(api key) have arrived
-      this.initMapBox(data);
-    })
+    const promises = [
+      fetch(getApiUrl).then((response) => response.text()),
+      fetch(getMarkersUrl).then((response) => response.json())
+    ];
+
+    Promise.all(promises)
+      .then(([apiKey, markers]) => {
+        // Call the map's initialization only when both apiKey and markers have arrived
+        this.initMapBox(apiKey, markers)
+      })
+      .catch((error) => {
+        console.log('Error : ', error);
+      })
   }
 
-  initMapBox(apiKey) {
+  initMapBox(apiKey, markers) {
     // Initialization of the MapBox
     mapboxgl.accessToken = apiKey
 
@@ -27,23 +35,23 @@ export default class extends Controller {
       style: "mapbox://styles/mapbox/streets-v10"
     })
 
-    this.#addMarkersToMap()
-    this.#fitMapToMarkers()
+    this.#addMarkersToMap(markers)
+    this.#fitMapToMarkers(markers)
   }
 
-  #addMarkersToMap() {
+  #addMarkersToMap(markers) {
     // Add the markers for the sessions locations
-    this.markersValue.forEach((marker) => {
+    markers.forEach((marker) => {
       new mapboxgl.Marker()
         .setLngLat([marker.lng, marker.lat])
         .addTo(this.map)
     })
   }
 
-  #fitMapToMarkers() {
+  #fitMapToMarkers(markers) {
     // Set the map frontiers 
     const bounds = new mapboxgl.LngLatBounds()
-    this.markersValue.forEach(marker => bounds.extend([marker.lng, marker.lat]))
+    markers.forEach(marker => bounds.extend([marker.lng, marker.lat]))
     this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 })
   }
 }

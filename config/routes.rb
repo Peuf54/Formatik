@@ -27,5 +27,6 @@ Rails.application.routes.draw do
   get '/pre_inscription/check_preinscriptions', to: 'pre_inscriptions#check_preinscription'
 
   get '/getMapBoxApiKey', to: 'application#getMapBoxApiKey'
+  get '/getMarkersForMap/:id', to: 'sessions#getMarkersForMap'
 
 end
