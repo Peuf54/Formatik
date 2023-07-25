@@ -27,34 +27,12 @@
     <%= javascript_importmap_tags %>
     <%= favicon_link_tag %>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-      $(document).ready(function() {
-        setInterval(checkForNewPreinscriptions, 5000); // 30 secondes
 
-        function checkForNewPreinscriptions() {
-          console.log("Checking for new Preinscriptions...");
-          $.ajax({
-            url: "/pre_inscription/check_preinscriptions",
-            type: "GET",
-            dataType: "json",
-            success: function(response) {
-              if (response.newPreinscriptions > 0) {
-                alert("Nouvelle Preinscriptions: " + response.newPreinscriptions);
-                // à remplacer par un flash alert
-              }
-            },
-            error: function() {
-              console.log("Error checking for new Preinscriptions.");
-            }
-          });
-        }
-      });
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   </head>
 
-  <body class="colorback">
+  <body class="colorback" data-controller="recherche-de-preinscriptions">
   <%= render "shared/flashes" %>
   <div class="main-container">
     <div class="navbar-yield"><%= render "shared/navbar" %></div>
